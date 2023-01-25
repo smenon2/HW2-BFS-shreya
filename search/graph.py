@@ -26,16 +26,17 @@ class Graph:
         # First get the graph g
         g = self.graph
 
-        # Initialize the lists that contain visited nodes and the queue
+        # Initialize empty lists that contain visited nodes and the queue
         visited = []
         queue = []
 
-        # Now check if graph is empty, if start and end node exist
-        # Initialize the visited and queue list with the start node
+        # Now check if graph is empty and if start and end node exist
+        # Raise exceptions if an invalid graph, start or end node is provided
 
         if len(g.edges) > 0:
             if start in g.nodes():
                 print("Starting at:", start)
+                # Initialize the queue list with the start node
                 queue.append([start])
                 if end is not None and end not in g.nodes():
                     raise ValueError("End node not found in graph")
@@ -55,12 +56,16 @@ class Graph:
             raise ValueError("Start node has no neighbors")
 
         # BFS Traversal
-        # Break out of the loop if the end is reached and this will
-        break_out_flag = False
-
+        # Start moving through the queue
         while queue:
+            # Get the next path in the queue
             path_survey = queue.pop(0)
+            # Get the last node in the path being surveyed
             node_survey = path_survey[-1]
+            # Now if the last node in the path hasn't been visited yet, we will go through the neighbors of the node and
+            # We will add the neighbor to the path (this is how we keep track of the paths that have been surveyed)
+            # Then add the new path to the queue
+            # Add the node that is being surveyed to the visited list
             if node_survey not in visited:
                 for neighbor in g[node_survey]:
                     path_new = list(path_survey)
@@ -71,6 +76,7 @@ class Graph:
                         return path_new
                 visited.append(node_survey)
 
+        # Return the entire visited list if there is no path
         if end is None:
             return visited
 
