@@ -5,6 +5,10 @@ Breadth-first search
 # Description of this Repo
 This repo contains a function that allows you to read in a graph and run BFS traversal on the graph. 
 Breadth first search starts a root node and then visits every node nearest to the start node before moving to the next depth level.
+For example, from the start node, the algorithm will first visit all the neighbors of the start node. This means that algorithm will add 
+all the neighbors of the start node to a queue. The algorithm will move through the queue, adding the neighbors of the 
+node being traversed if they haven't been visited yet to the queue. 
+
 The function, bfs, requires that a start node is provided. It will also accept an end node. 
 If provided with an end node, the function will return the shortest path between the start and end node. 
 If no end node is provided, the function will use BFS to traverse the graph. 
