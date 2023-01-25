@@ -3,6 +3,7 @@ import pytest
 from search import graph
 import networkx as nx
 import unittest
+import pathlib
 
 
 def test_bfs_traversal():
@@ -13,7 +14,9 @@ def test_bfs_traversal():
     that all nodes are being traversed (ie. returns 
     the right number of nodes, in the right order, etc.)
     """
-    G = graph.Graph('../data/tiny_network.adjlist')
+    data_dir = pathlib.Path(__file__).resolve().parent.parent / "data"
+    graph_file = data_dir / 'tiny_network.adjlist'
+    G = graph.Graph(graph_file)
     # Creating BFS starting with Martin Kampmann
     vis = G.bfs('Martin Kampmann')
 
@@ -55,7 +58,10 @@ def test_bfs():
 
     # First we can check to see if my bfs returns the shortest path using simple case
     # We can test it against the networkx functions
-    G = graph.Graph('../data/citation_network.adjlist')
+    data_dir = pathlib.Path(__file__).resolve().parent.parent / "data"
+    graph_file = data_dir / 'citation_network.adjlist'
+    G = graph.Graph(graph_file)
+
     vis1 = G.bfs('Martin Kampmann', 'Ryan Corces')
     network_path = nx.shortest_path(G.graph, source='Martin Kampmann', target='Ryan Corces')
 
@@ -77,7 +83,10 @@ def test_edge_empty():
     Here I'm testing a few edges cases - empty graph
     """
     # First I'll test an empty graph
-    G = graph.Graph('empty.adjlist')
+    data_dir = pathlib.Path(__file__).resolve().parent.parent / "test"
+    graph_file = data_dir / 'empty.adjlist'
+    G = graph.Graph(graph_file)
+
     try:
         vis = G.bfs('Martin Kampmann')
     except ValueError:
@@ -94,7 +103,10 @@ def test_edge_no_start():
     Here I'm testing a few edges cases - start node that doesn't exist
     """
     # Testing with start node that doesn't exist in the graph
-    G = graph.Graph('../data/citation_network.adjlist')
+    data_dir = pathlib.Path(__file__).resolve().parent.parent / "data"
+    graph_file = data_dir / 'citation_network.adjlist'
+    G = graph.Graph(graph_file)
+
     try:
         vis = G.bfs('Martin Kampmann1')
     except ValueError:
@@ -110,5 +122,7 @@ def test_edge_no_start():
 # Here I am testing a case that I know will fail, and checking that an assertion was raised
 class TestCases(unittest.TestCase):
     def test_end_node(self):
-        G = graph.Graph('../data/citation_network.adjlist')
+        data_dir = pathlib.Path(__file__).resolve().parent.parent / "data"
+        graph_file = data_dir / 'citation_network.adjlist'
+        G = graph.Graph(graph_file)
         self.assertRaises(ValueError, lambda: G.bfs('Martin Kampmann', 'RyanCo'))
