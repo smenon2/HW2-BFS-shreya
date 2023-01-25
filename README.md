@@ -2,6 +2,15 @@
 # Assignment 2
 Breadth-first search
 
+# Description of this Repo
+This repo contains a function that allows you to read in a graph and run BFS traversal on the graph. 
+Breadth first search starts a root node and then visits every node nearest to the start node before moving to the next depth level.
+The function, bfs, requires that a start node is provided. It will also accept an end node. 
+If provided with an end node, the function will return the shortest path between the start and end node. 
+If no end node is provided, the function will use BFS to traverse the graph. 
+
+
+
 # Assignment Overview
 The purpose of this assignment is to get you comfortable working with graph structures and to implement a breadth-first search function to traverse the graph and find the shortest path between nodes.
 
