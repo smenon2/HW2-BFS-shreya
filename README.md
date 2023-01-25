@@ -1,3 +1,4 @@
+![BuildStatus](https://github.com/smenon2/HW2-BFS-shreya/actions/workflows/test.yml/badge.svg?event=push)
 # Assignment 2
 Breadth-first search
 
